@@ -1,9 +1,9 @@
 from django.urls import path
-from core.views import MainView, TestTask, WebSocketTest
+from core.views import MainView, WebSocket, InferenceAI
 
 
 urlpatterns = [
     path("", MainView.as_view(), name="home"),
-    path("task/", TestTask.as_view(), name="test_task"),
-    path("socket/", WebSocketTest.as_view(), name="web_socket"),
+    path("socket/", WebSocket.as_view(), name="web_socket"),
+    path("ai/", InferenceAI.as_view(), name="ai"),
 ]

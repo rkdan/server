@@ -14,3 +14,7 @@ django-celery-results
 #Repository of Cubode Agent Backend. Architecture of Django + Celery + Redis + Channels for using AI Agents Asynchronously and serve them to the client when executed. WebSockets
 channels==4.1.0
 channels_redis==4.2.0
+
+# AI
+langchain==0.2.6
+langchain_groq==0.1.6
