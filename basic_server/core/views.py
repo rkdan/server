@@ -12,10 +12,18 @@ class TestTask(View):
   def get(self, request, *args, **kwargs):
      try:
          params = { #EXAMPLE ARGS
-             'x':11,
+             'x':10,
              'y':5
          }
          task = add.delay(params)  # RUN THE TASK 
          return JsonResponse({'data': 'initialising', 'task_id': task.id}, status=200)     
      except Exception as e:
-         return JsonResponse({'error': str(e)}, status=401) 
+         return JsonResponse({'error': str(e)}, status=401)
+     
+class WebSocketTest(View):
+    def get(self, request, *args, **kwargs):
+      try:
+          return render(request, "websocket.html")
+      except Exception as e:
+          print(str(e))
+          return HttpResponse({'error': str(e)}, status=401)
