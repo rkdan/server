@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  
+  web:
+    build:
+      context: ./basic_server
+      dockerfile: ./docker/Dockerfile.dev.local
+    command: uvicorn core.asgi:application --host 0.0.0.0 --port 8000 --reload --reload-include '*.py' --reload-include '*.html'
+    restart: always
+    container_name: basic_server_development
+    volumes:
+      - ./basic_server:/basic_server
+    ports:
+      - 8000:8000
+    env_file:
+      - ./basic_server/docker/.env.dev.local
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.development
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: basic_server_redis_development
+
+  celery:
+    container_name: basic_server_celery
+    build:
+      context: ./basic_server
+      dockerfile: ./docker/Dockerfile.celery.local
+    command: celery --app=core worker -l INFO
+    volumes:
+      - ./basic_server:/basic_server
+    #   - ./cubode/resources/webtemplates/development:/cubode/resources/webtemplates/development
+    env_file:
+      - ./basic_server/docker/.env.celery.local
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.development
+    depends_on:
+      - redis
+      - web

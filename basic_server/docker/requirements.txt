@@ -1,0 +1,16 @@
+# Django
+Django==4.2.8
+
+# Asynchronous Support & Async Django Rest Framework
+uvicorn[standard]
+
+# Redis
+django-redis==5.2.0
+
+# Celery Workers
+celery==5.3.6
+django-celery-results
+
+#Repository of Cubode Agent Backend. Architecture of Django + Celery + Redis + Channels for using AI Agents Asynchronously and serve them to the client when executed. WebSockets
+channels==4.1.0
+channels_redis==4.2.0

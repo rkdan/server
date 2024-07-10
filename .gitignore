@@ -1,0 +1,7 @@
+venv
+
+# anything anywhere beggining with .env
+.env*
+
+# any cache files
+__pycache__
