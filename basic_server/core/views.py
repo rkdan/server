@@ -2,6 +2,8 @@ from django.http import JsonResponse, HttpResponse
 from django.views import View
 from core.tasks import inference_ai
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from core.tasks import inference_ai
 
 class MainView(View):
     def get(self, request, *args, **kwargs):
@@ -23,4 +25,8 @@ class WebSocket(View):
       except Exception as e:
           print(str(e))
           return HttpResponse({'error': str(e)}, status=401)
+      
+class HtmxTest(View):
+  def get(self,request):
+      return render(request,"htmx_webpage.html")
       
